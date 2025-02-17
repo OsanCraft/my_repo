@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h1>Upload Image</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Upload</button>
+    </form>
+
+    <!-- Preview -->
+    <img id="preview" style="max-width: 300px; margin-top: 20px;">
+
+    <script>
+        document.getElementById('id_image').addEventListener('change', function(e) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                document.getElementById('preview').src = reader.result;
+            }
+            reader.readAsDataURL(e.target.files[0]);
+        });
+    </script>
+
+<li><a href="{% url 'gallery' %}">View Gallery</a></li>
+<li><a href="{% url 'home' %}">home</a></li>
+</body>
+
+<footer>
+    <p>Image Archive @All rights reserved</p>
+</footer>
+</html>
